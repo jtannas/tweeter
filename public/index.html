@@ -12,6 +12,7 @@
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
@@ -30,23 +31,16 @@
 
     <!-- Page-specific (main) content here -->
     <main class="container">
-      <p>Hello World</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, laudantium fuga. Atque molestias accusamus, ipsum debitis! In expedita, laborum, beatae earum quis pariatur atque nesciunt quas eum, iste porro dolore.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolor, perspiciatis expedita dicta officiis veniam. Consequatur enim repudiandae quia ab. Corporis inventore veritatis enim, ipsa accusamus blanditiis dignissimos quisquam deserunt.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolor, perspiciatis expedita dicta officiis veniam. Consequatur enim repudiandae quia ab. Corporis inventore veritatis enim, ipsa accusamus blanditiis dignissimos quisquam deserunt.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolor, perspiciatis expedita dicta officiis veniam. Consequatur enim repudiandae quia ab. Corporis inventore veritatis enim, ipsa accusamus blanditiis dignissimos quisquam deserunt.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolor, perspiciatis expedita dicta officiis veniam. Consequatur enim repudiandae quia ab. Corporis inventore veritatis enim, ipsa accusamus blanditiis dignissimos quisquam deserunt.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolor, perspiciatis expedita dicta officiis veniam. Consequatur enim repudiandae quia ab. Corporis inventore veritatis enim, ipsa accusamus blanditiis dignissimos quisquam deserunt.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolor, perspiciatis expedita dicta officiis veniam. Consequatur enim repudiandae quia ab. Corporis inventore veritatis enim, ipsa accusamus blanditiis dignissimos quisquam deserunt.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolor, perspiciatis expedita dicta officiis veniam. Consequatur enim repudiandae quia ab. Corporis inventore veritatis enim, ipsa accusamus blanditiis dignissimos quisquam deserunt.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolor, perspiciatis expedita dicta officiis veniam. Consequatur enim repudiandae quia ab. Corporis inventore veritatis enim, ipsa accusamus blanditiis dignissimos quisquam deserunt.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolor, perspiciatis expedita dicta officiis veniam. Consequatur enim repudiandae quia ab. Corporis inventore veritatis enim, ipsa accusamus blanditiis dignissimos quisquam deserunt.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolor, perspiciatis expedita dicta officiis veniam. Consequatur enim repudiandae quia ab. Corporis inventore veritatis enim, ipsa accusamus blanditiis dignissimos quisquam deserunt.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolor, perspiciatis expedita dicta officiis veniam. Consequatur enim repudiandae quia ab. Corporis inventore veritatis enim, ipsa accusamus blanditiis dignissimos quisquam deserunt.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolor, perspiciatis expedita dicta officiis veniam. Consequatur enim repudiandae quia ab. Corporis inventore veritatis enim, ipsa accusamus blanditiis dignissimos quisquam deserunt.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolor, perspiciatis expedita dicta officiis veniam. Consequatur enim repudiandae quia ab. Corporis inventore veritatis enim, ipsa accusamus blanditiis dignissimos quisquam deserunt.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolor, perspiciatis expedita dicta officiis veniam. Consequatur enim repudiandae quia ab. Corporis inventore veritatis enim, ipsa accusamus blanditiis dignissimos quisquam deserunt.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati dolor, perspiciatis expedita dicta officiis veniam. Consequatur enim repudiandae quia ab. Corporis inventore veritatis enim, ipsa accusamus blanditiis dignissimos quisquam deserunt.</p>
+
+      <section class="new-tweet">
+        <h2>Compose Tweet</h2>
+        <form action="/tweets" method="POST">
+          <textarea name="text" placeholder="What are you humming about?"></textarea>
+          <button type="submit">Tweet</button>
+          <span class="counter">140</span>
+        </form>
+      </section>
+
     </main>
 
   </body>

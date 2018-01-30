@@ -34,9 +34,16 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
 }
 
-main {
+.container {
   background-color: white;
   margin: 0 auto;
   padding: 140px 0 0;
   width: 450px;
+}
+
+.container:after {
+  /* Clearfix */
+  content: "";
+  display: table;
+  clear: both;
 }
