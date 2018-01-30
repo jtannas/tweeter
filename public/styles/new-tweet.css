@@ -20,3 +20,7 @@
 .new-tweet .counter {
   float: right;
 }
+
+.new-tweet .counter.invalid {
+  color: red;
+}
