@@ -8,11 +8,13 @@
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,700,300i,700i" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/tweet.css" type="text/css" />
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
@@ -26,7 +28,7 @@
 
     <!-- Top nav bar (fixed) -->
     <nav id="nav-bar">
-      <img class="logo" src="/images/bird.png">
+      <img class="logo" src="/images/bird.png" alt="logo">
       <span class="header">Tweeter</span>
     </nav>
 
@@ -40,6 +42,34 @@
           <button type="submit">Tweet</button>
           <span class="counter">140</span>
         </form>
+      </section>
+
+      <section id="tweet-container">
+
+        <article class="tweet">
+
+          <header>
+            <img class="profile-picture" src="/images/bird.png" alt="profile picture">
+            <div class="author-data">
+              <h2 class="author-name">Tweet 0</h2>
+              <span class="author-handle">@tweet</span>
+            </div>
+          </header>
+
+          <main>My Dummy Tweet that has lots of unneeded text to be filler so that it goes into two lines.</main>
+          <hr>
+
+          <footer>
+            <span class="date-created">Right Meow</span>
+            <div class="icons">
+              <button href=""><i class="fas fa-retweet"></i></button>
+              <button href=""><i class="fas fa-flag"></i></button>
+              <button href=""><i class="fas fa-heart"></i></button>
+            </div>
+          </footer>
+
+        </article>
+
       </section>
 
     </main>
