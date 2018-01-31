@@ -33,13 +33,20 @@
       <span class="header">Tweeter</span>
     </nav>
 
+    <!-- Flash Message Dialog-->
+    <dialog class="flash">
+      <h1></h1>
+      <p></p>
+      <button class="close">Okay</button>
+    </dialog>
+
     <!-- Page-specific (main) content here -->
     <main class="container">
 
       <section class="new-tweet">
         <h2>Compose Tweet</h2>
         <form action="/tweets" method="POST">
-          <textarea name="text" placeholder="What are you humming about?"></textarea>
+          <textarea name="text" placeholder="What are you humming about?" required></textarea>
           <button type="submit">Tweet</button>
           <span class="counter">140</span>
         </form>
