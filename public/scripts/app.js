@@ -6,33 +6,31 @@
 
 $(document).ready(function() {
 
-  function timeSince(date) {
-    // https://stackoverflow.com/a/3177838/7950458
-    var seconds = Math.floor((new Date() - date) / 1000);
+  const timeSince = function returnHumanFriendlyStringOfHowLongSinceDate(date) {
+    // Inspired by https://stackoverflow.com/a/3177838/7950458
+    const secondsPer = [
+      { name: 'year', value: 60 * 60 * 24 * 365 },
+      { name: 'month', value: 60 * 60 * 24 * 30 },
+      { name: 'week', value: 60 * 60 * 24 * 7 },
+      { name: 'day', value: 60 * 60 * 24 },
+      { name: 'hour', value: 60 * 60 },
+      { name: 'minute', value: 60 },
+      { name: 'second', value: 1 },
+      { name: 'millisecond', value: 1e-3 },
+      { name: 'microseconds', value: 1e-6 },
+      { name: 'nanosecond', value: 1e-9 }
+    ];
 
-    var interval = Math.floor(seconds / 31536000);
-
-    if (interval > 1) {
-      return interval + " years";
+    const seconds = Math.floor((new Date() - date) / 1000);
+    let interval;
+    for (let unit of secondsPer) {
+      interval = Math.floor(seconds / unit.value);
+      if (interval > 1) {
+        return `${interval} ${unit.name}s ago`;
+      }
     }
-    interval = Math.floor(seconds / 2592000);
-    if (interval > 1) {
-      return interval + " months";
-    }
-    interval = Math.floor(seconds / 86400);
-    if (interval > 1) {
-      return interval + " days";
-    }
-    interval = Math.floor(seconds / 3600);
-    if (interval > 1) {
-      return interval + " hours";
-    }
-    interval = Math.floor(seconds / 60);
-    if (interval > 1) {
-      return interval + " minutes";
-    }
-    return Math.floor(seconds) + " seconds";
-  }
+    return 'Just now';
+  };
 
   // Test / driver code (temporary). Eventually will get this from the server.
   const tweetData = {
@@ -51,49 +49,56 @@ $(document).ready(function() {
     "created_at": 1461116232227
   };
 
-  function createProfilePic(tweetData) {
+  const createProfilePic = function createProfilePicElementFromTweetData(tweetData) {
     const $profilePic = $('<img>').addClass("profile-picture");
     $profilePic.attr({ src: tweetData.user.avatars.small, alt: 'profile picture' });
     return $profilePic;
-  }
+  };
 
-  function createAuthorData(tweetData) {
+  const createAuthorData = function createAuthorDataElementFromTweetData(tweetData) {
     const $authorData = $('<div></div>').addClass('author-data');
     $authorData.append($('<h2></h2>').addClass('author-name').text(tweetData.user.name));
     $authorData.append($('<span></span>').addClass('author-handle').text(tweetData.user.handle));
     return $authorData;
-  }
+  };
 
-  function createTweetHeader(tweetData) {
+  const createTweetHeader = function createTweetHeaderElementFromTweetData(tweetData) {
     const $header = $('<header></header>');
     $header.append(createProfilePic(tweetData));
     $header.append(createAuthorData(tweetData));
     return $header;
-  }
+  };
 
-  function createTweetButtons(tweetData) {
+  const createTweetButtons = function createTweetInteractionButtonElements() {
     const $buttons = $('<div></div>').addClass('icons');
     $buttons.append($('<button href=""><i class="fas fa-retweet"></i></button>'));
     $buttons.append($('<button href=""><i class="fas fa-flag"></i></button>'));
     $buttons.append($('<button href=""><i class="fas fa-heart"></i></button>'));
     return $buttons;
-  }
+  };
 
-  function createTweetFooter(tweetData) {
+  const createTweetFooter = function createTweetFooterElementFromTweetData(tweetData) {
     const $footer = $('<footer></footer>');
     const timeAgo = timeSince(new Date(tweetData.created_at));
-    $footer.append($('<span></span>').addClass('date-created').text(timeAgo));
+    const localTime = (new Date(tweetData.created_at)).toLocaleString();
+    $footer.append($('<span></span>').addClass('date-created').text(timeAgo).prop('title', localTime));
     $footer.append(createTweetButtons());
     return $footer;
-  }
+  };
 
-  function createTweet(tweetData) {
+  const createTweet = function createTweetElementFromTweetData(tweetData) {
     const $tweet = $('<article></article>').addClass('tweet');
     $tweet.append(createTweetHeader(tweetData));
     $tweet.append($('<main></main>').text(tweetData.content.text)).append('<hr>');
     $tweet.append(createTweetFooter(tweetData));
     return $tweet;
-  }
+  };
 
-  $('#tweet-container').append(createTweet(tweetData));
+  const renderTweets = function renderTweetElementsIntoPageFromArrayOfTweetData(tweetDataArray) {
+    for (let tweetData of tweetDataArray) {
+      $('#tweet-container').append(createTweet(tweetData));
+    }
+  };
+
+  renderTweets([tweetData]);
 });
