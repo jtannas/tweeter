@@ -23,3 +23,18 @@
   font-size: 2em;
   padding-left: 10px;
 }
+
+#nav-bar .compose {
+  margin-left: auto;
+  background-color: #EBFCFF;
+  color: #459C88;
+  border: 1px solid black;
+  border-radius: 0.5em;
+  padding: 1em 0.5em;
+  font-weight: 700;
+}
+
+#nav-bar .compose:hover {
+  background-color: white;
+  color: black;
+}

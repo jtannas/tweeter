@@ -6,5 +6,11 @@ const charCounter = function updateRemainingTweetLengthCounter(event) {
 };
 
 $(document).ready(() => {
-  $('.new-tweet').on('input', 'textarea', charCounter);
+  const newTweet = $('.new-tweet');
+  newTweet.hide();
+  newTweet.on('input', 'textarea', charCounter);
+  $('.compose').on('click', () => {
+    newTweet.slideToggle();
+    newTweet.find('textarea').focus();
+  });
 });

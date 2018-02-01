@@ -14,15 +14,20 @@ const submitNewTweet = function submitSerializedNewTweetToServer(event) {
 
   const errorMessages = validateTweet($(this).find('textarea').val());
   if (errorMessages.length) {
-    flash(errorMessages.join('\n'), 'Invalid Tweet (>_<)');
+    dialog(errorMessages.join('\n'), 'Invalid Tweet (>_<)');
   } else {
+
     $.ajax({
       type: $(this).attr('method'),
       cache: false,
       url: $(this).attr('action'),
-      data: $(this).serialize(),
-      success: () => getTweets(renderTweets)
+      data: $(this).serialize()
+    }).success(() => {
+      getTweets(renderTweets);
+      $(this).find('textarea').val('');
+      $('.new-tweet').slideUp();
     });
+
   }
   return false;
 };
