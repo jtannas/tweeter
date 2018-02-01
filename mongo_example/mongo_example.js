@@ -18,9 +18,12 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
     // Lazy error handling:
     if (err) { throw err; }
 
-    // So we read the fantastic manual, right?
-    console.log("for each item yielded by the cursor:");
-    results.each((err, item) => console.log(" ", item));
+    // We could instead just slurp the items into an array:
+    results.toArray((err, resultsArray) => {
+      if (err) { throw err; }
+
+      console.log("results.toArray:", resultsArray);
+    });
 
     // This is the end...
     db.close();
