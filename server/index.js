@@ -5,7 +5,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
 
-const dataHelpersFactory = require("./lib/data-helpers.js");
+const dataHelpersFactory = require("./db-tools/data-helpers.js");
 const tweetsRoutesFactory = require("./routes/tweets");
 
 

@@ -2,7 +2,7 @@
 
 /** Imports */
 const express = require('express');
-const userHelper = require("../lib/util/user-helper");
+const userHelper = require("../util/user-helper");
 
 /** Helper Functions */
 const errHandler = function internalServerErrorHandler(err, req, res) {
