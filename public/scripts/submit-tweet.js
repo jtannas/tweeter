@@ -24,8 +24,8 @@ const submitNewTweet = function submitSerializedNewTweetToServer(event) {
       data: $(this).serialize()
     }).success(() => {
       getTweets(renderTweets);
-      $(this).find('textarea').val('');
       $('.new-tweet').slideUp();
+      $(this).find('textarea').val('').trigger('change');
     });
 
   }

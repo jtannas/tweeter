@@ -8,7 +8,7 @@ const charCounter = function updateRemainingTweetLengthCounter(event) {
 $(document).ready(() => {
   const newTweet = $('.new-tweet');
   newTweet.hide();
-  newTweet.on('input', 'textarea', charCounter);
+  newTweet.on('change input', 'textarea', charCounter);
   $('.compose').on('click', () => {
     newTweet.slideToggle();
     newTweet.find('textarea').focus();
