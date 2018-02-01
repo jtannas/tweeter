@@ -14,16 +14,11 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   console.log(`Connected to mongodb: ${MONGODB_URI}`);
 
   // Let's "get all the tweets". In Mongo-speak, we "find" them.
-  db.collection("tweets").find({}, (err, results) => {
+  db.collection("tweets").find().toArray((err, results) => {
     // Lazy error handling:
     if (err) { throw err; }
 
-    // We could instead just slurp the items into an array:
-    results.toArray((err, resultsArray) => {
-      if (err) { throw err; }
-
-      console.log("results.toArray:", resultsArray);
-    });
+    console.log("results.toArray:", resultsArray);
 
     // This is the end...
     db.close();
