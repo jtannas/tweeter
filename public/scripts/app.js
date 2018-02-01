@@ -12,14 +12,14 @@ const renderTweets = function renderTweetElementsIntoPageFromArrayOfTweetData(tw
   }
 };
 
-const getTweets = function asyncGetTweetDataFromServer() {
+const getTweets = function asyncGetTweetDataFromServer(successCb) {
   $.ajax({
     url: '/tweets',
     method: 'GET',
-    success: tweets => renderTweets(tweets)
+    success: tweets => successCb(tweets)
   });
 };
 
 $(document).ready(function() {
-  getTweets();
+  getTweets(renderTweets);
 });

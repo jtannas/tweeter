@@ -21,7 +21,7 @@ const submitNewTweet = function submitSerializedNewTweetToServer(event) {
       cache: false,
       url: $(this).attr('action'),
       data: $(this).serialize(),
-      success: getTweets
+      success: () => getTweets(renderTweets)
     });
   }
   return false;
