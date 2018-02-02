@@ -1,9 +1,12 @@
 "use strict";
 
 /** Imports */
+const path = require('path');
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
+const nodeSassMiddleware = require('node-sass-middleware');
 
 const dataHelpersFactory = require("./db-tools/data-helpers.js");
 const tweetsRoutesFactory = require("./routes/tweets");
@@ -12,15 +15,25 @@ const tweetsRoutesFactory = require("./routes/tweets");
 /** Settings */
 const MONGODB_URI = "mongodb://localhost:27017/tweeter";
 const APP_PORT = 8080;
+const STATIC_DIR = path.join(__dirname, "../public");
+const SASS_DIR = path.join(STATIC_DIR, "sass");
+const STYLES_DIR = path.join(STATIC_DIR, "styles");
 
 
 /** App Factory Function*/
-const createApp = function createAndConfigWebServer(path, routes, staticDir = "public") {
+const createApp = function createAndConfigWebServer(path_, routes) {
   const app = express();
 
   app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(express.static(staticDir));
-  app.use(path, routes);
+  app.use(nodeSassMiddleware({
+    src: SASS_DIR,
+    dest: STYLES_DIR,
+    debug: true,
+    outputStyle: 'compressed',
+    prefix: '/styles/'
+  }));
+  app.use(express.static(STATIC_DIR));
+  app.use(path_, routes);
 
   return app;
 };
