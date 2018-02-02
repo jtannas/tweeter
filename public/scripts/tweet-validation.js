@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Module responsible for client-side tweet validation and some cues.
  */

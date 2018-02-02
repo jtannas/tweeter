@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Module responsible for functions that are used to render tweet data into
  * the DOM.

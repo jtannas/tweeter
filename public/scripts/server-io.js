@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Module responsible for all communication with the back-end.
  */

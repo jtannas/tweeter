@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Module responsible for creating dialog boxes to the user.
  */

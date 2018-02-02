@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Entry point to the front end javascript; contains all jQuery references to the DOM.
  *
