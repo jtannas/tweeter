@@ -21,11 +21,11 @@
 
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
-    <script type="text/javascript" src="/scripts/create-tweet.js"></script>
-    <script type="text/javascript" src="/scripts/compose-tweet.js"></script>
-    <script type="text/javascript" src="/scripts/dialog.js"></script>
-    <script type="text/javascript" src="/scripts/submit-tweet.js"></script>
-    <script type="text/javascript" src="/scripts/time.js"></script>
+    <script type="text/javascript" src="/scripts/render-tweets.js"></script>
+    <script type="text/javascript" src="/scripts/server-io.js"></script>
+    <script type="text/javascript" src="/scripts/tweet-validation.js"></script>
+    <script type="text/javascript" src="/scripts/utils/flash-dialog.js"></script>
+    <script type="text/javascript" src="/scripts/utils/time.js"></script>
 
   </head>
 
@@ -40,14 +40,15 @@
 
     <!-- Flash Message Dialog-->
     <dialog class="flash">
-      <h1></h1>
-      <p></p>
+      <h1 class="title"></h1>
+      <p class="message"></p>
       <button class="close">Okay</button>
     </dialog>
 
     <!-- Page-specific (main) content here -->
     <main class="container">
 
+      <!-- New Tweet Dialogue -->
       <section class="new-tweet">
         <h2>Compose Tweet</h2>
         <form action="/tweets" method="POST">
@@ -57,6 +58,7 @@
         </form>
       </section>
 
+      <!-- Tweets are rendered here - it is wiped clean before each render -->
       <section id="tweet-container">
       </section>
 
