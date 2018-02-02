@@ -1,3 +1,4 @@
+/** To isolate the function definition from the DOM definition, a factory function is used */
 const charCounterCbFactory = function createCallbackForARemainingLengthCounter(newTweetObj, maxLen) {
   return function updateRemainingTweetLengthCounter(event) {
     const currLen = newTweetObj.content.val().length;
@@ -7,6 +8,8 @@ const charCounterCbFactory = function createCallbackForARemainingLengthCounter(n
   };
 };
 
+
+/** To isolate the function definition from the DOM definition, a factory function is used */
 const tweetValidatorFactory = function createTweetValidatorUsingMaxLen(maxLen) {
   return function returnErrorFromValidationChecksOnTweet(tweetText) {
     const errorMessages = [];

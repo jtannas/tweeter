@@ -43,6 +43,7 @@ const createTweet = function createTweetElementFromTweetData(tweetData) {
   return tweet;
 };
 
+/** To isolate the function definition from the DOM definition, a factory function is used*/
 const renderTweetFactory = function makeAFunctionToRenderTweets(tweetContainer) {
   return function renderTweetElementsIntoPageFromArrayOfTweetData(tweetDataArray) {
     tweetContainer.html('');
