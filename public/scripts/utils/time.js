@@ -1,3 +1,7 @@
+/**
+ * Utility module for dealing with dates & times.
+ */
+
 const timeSince = function returnHumanFriendlyStringOfHowLongSinceDate(date) {
   // Inspired by https://stackoverflow.com/a/3177838/7950458
   const secondsPer = [

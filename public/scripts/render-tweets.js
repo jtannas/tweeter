@@ -1,3 +1,8 @@
+/**
+ * Module responsible for functions that are used to render tweet data into
+ * the DOM.
+ */
+
 const createProfilePic = function createProfilePicElementFromTweetData(tweetData) {
   const profilePic = $('<img>').addClass("profile-picture");
   profilePic.attr({ src: tweetData.user.avatars.small, alt: 'profile picture' });

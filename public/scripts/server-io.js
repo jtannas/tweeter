@@ -1,3 +1,7 @@
+/**
+ * Module responsible for all communication with the back-end.
+ */
+
 const getTweets = function asyncGetTweetDataFromServer(successCb) {
   $.ajax({
     url: '/tweets',

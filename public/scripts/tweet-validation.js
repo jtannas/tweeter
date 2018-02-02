@@ -1,3 +1,8 @@
+/**
+ * Module responsible for client-side tweet validation and some cues.
+ */
+
+
 /** To isolate the function definition from the DOM definition, a factory function is used */
 const charCounterCbFactory = function createCallbackForARemainingLengthCounter(newTweetObj, maxLen) {
   return function updateRemainingTweetLengthCounter(event) {
