@@ -11,7 +11,8 @@
     "content": {
       "text": "If I have seen further it is by standing on the shoulders of giants"
     },
-    "createdAt": 1461116232227
+    "createdAt": 1461116232227,
+    "likers": []
   },
   {
     "user": {
@@ -26,7 +27,8 @@
     "content": {
       "text": "Je pense , donc je suis"
     },
-    "createdAt": 1461113959088
+    "createdAt": 1461113959088,
+    "likers": []
   },
   {
     "user": {
@@ -41,6 +43,7 @@
     "content": {
       "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
     },
-    "createdAt": 1461113796368
+    "createdAt": 1461113796368,
+    "likers": []
   }
 ]

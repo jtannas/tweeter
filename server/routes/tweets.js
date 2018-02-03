@@ -5,6 +5,8 @@ const express = require('express');
 const userHelper = require("../util/user-helper");
 
 /** Helper Functions */
+const user = req => req.body.user ? req.body.user : userHelper.generateRandomUser();
+
 const errHandler = function internalServerErrorHandler(err, req, res) {
   if (err) {
     res.status(500).json({ error: err.message });
@@ -25,13 +27,13 @@ const tweetInvalidHandler = function tweetInvalidErrorHandler(req, res) {
 };
 
 const parseTweet = function parseReqBodyIntoTweetDocument(req) {
-  const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
   return {
-    user: user,
+    user: user(req),
     content: {
       text: req.body.text
     },
-    createdAt: Date.now()
+    createdAt: Date.now(),
+    likers: []
   };
 };
 
@@ -47,6 +49,12 @@ module.exports = function(DataHelpers) {
     });
   });
 
+  tweetsRoutes.get("/:tweetId", function(req, res) {
+    DataHelpers.getTweet(req.params.tweetId, (err, tweet) => {
+      err ? errHandler(err, req, res) : res.status(200).json(tweet);
+    });
+  });
+
   tweetsRoutes.post("/", function(req, res) {
     if (!tweetInvalidHandler(req, res)) {
       DataHelpers.saveTweet(parseTweet(req), (err) => {
@@ -55,5 +63,10 @@ module.exports = function(DataHelpers) {
     }
   });
 
+  tweetsRoutes.patch("/:tweetId", function(req, res) {
+    DataHelpers.likeTweet(req.params.tweetId, user(req), (err, tweet) => {
+      err ? errHandler(err, req, res) : res.status(200).json(tweet);
+    });
+  });
   return tweetsRoutes;
 };
