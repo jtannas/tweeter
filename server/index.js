@@ -3,6 +3,7 @@
 /** Imports */
 const path = require('path');
 
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
@@ -13,7 +14,7 @@ const tweetsRoutesFactory = require("./routes/tweets");
 
 
 /** Settings */
-const MONGODB_URI = "mongodb://localhost:27017/tweeter";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/tweeter";
 const APP_PORT = 8080;
 const STATIC_DIR = path.join(__dirname, "../public");
 const SASS_DIR = path.join(STATIC_DIR, "sass");
