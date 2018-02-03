@@ -11,6 +11,7 @@ const nodeSassMiddleware = require('node-sass-middleware');
 
 const dataHelpersFactory = require("./db-tools/data-helpers.js");
 const tweetsRoutesFactory = require("./routes/tweets");
+const userRoutesFactory = require("./routes/users");
 
 
 /** Settings */
@@ -22,7 +23,7 @@ const STYLES_DIR = path.join(STATIC_DIR, "styles");
 
 
 /** App Factory Function*/
-const createApp = function createAndConfigWebServer(path_, routes) {
+const createApp = function createAndConfigWebServer(router) {
   const app = express();
 
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -35,8 +36,7 @@ const createApp = function createAndConfigWebServer(path_, routes) {
     indentedSyntax: true
   }));
   app.use(express.static(STATIC_DIR));
-  app.use(path_, routes);
-
+  app.use('/', router);
   return app;
 };
 
@@ -56,8 +56,12 @@ const createConnection = function createAndConfigDbConnection(callback) {
 /** Execute */
 createConnection((db) => {
   const dataHelpers = dataHelpersFactory(db);
-  const tweetsRoutes = tweetsRoutesFactory(dataHelpers);
-  createApp("/tweets", tweetsRoutes).listen(APP_PORT, () => {
+
+  const router = express.Router();
+  tweetsRoutesFactory(router, dataHelpers);
+  userRoutesFactory(router, dataHelpers);
+
+  createApp(router).listen(APP_PORT, () => {
     console.log("Tweeter listening on port " + APP_PORT);
   });
 });

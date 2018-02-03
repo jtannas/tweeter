@@ -1,7 +1,6 @@
 "use strict";
 
 /** Imports */
-const express = require('express');
 const userHelper = require("../util/user-helper");
 
 /** Helper Functions */
@@ -39,23 +38,21 @@ const parseTweet = function parseReqBodyIntoTweetDocument(req) {
 
 
 /** Route Factory */
-module.exports = function(DataHelpers) {
+module.exports = function(router, DataHelpers) {
 
-  const tweetsRoutes = express.Router();
-
-  tweetsRoutes.get("/", function(req, res) {
+  router.get("/tweets/", function(req, res) {
     DataHelpers.getTweets((err, tweets) => {
       err ? errHandler(err, req, res) : res.json(tweets);
     });
   });
 
-  tweetsRoutes.get("/:tweetId", function(req, res) {
+  router.get("/tweets/:tweetId", function(req, res) {
     DataHelpers.getTweet(req.params.tweetId, (err, tweet) => {
       err ? errHandler(err, req, res) : res.status(200).json(tweet);
     });
   });
 
-  tweetsRoutes.post("/", function(req, res) {
+  router.post("/tweets/", function(req, res) {
     if (!tweetInvalidHandler(req, res)) {
       DataHelpers.saveTweet(parseTweet(req), (err) => {
         err ? errHandler(err, req, res) : res.status(201).send();
@@ -63,10 +60,11 @@ module.exports = function(DataHelpers) {
     }
   });
 
-  tweetsRoutes.patch("/:tweetId", function(req, res) {
+  router.patch("/tweets/:tweetId", function(req, res) {
     DataHelpers.likeTweet(req.params.tweetId, user(req), (err, tweet) => {
       err ? errHandler(err, req, res) : res.status(200).json(tweet);
     });
   });
-  return tweetsRoutes;
+
+  return router;
 };
