@@ -30,7 +30,8 @@ const createApp = function createAndConfigWebServer(path_, routes) {
     dest: STYLES_DIR,
     debug: true,
     outputStyle: 'compressed',
-    prefix: '/styles/'
+    prefix: '/styles/',
+    indentedSyntax: true
   }));
   app.use(express.static(STATIC_DIR));
   app.use(path_, routes);

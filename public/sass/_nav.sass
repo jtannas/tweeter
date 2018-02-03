@@ -1,0 +1,35 @@
+@import utils/_base-classes
+
+$bar-height: 20vw
+$bar-max-height: 80px
+
+#nav-bar
+    @extend %top-nav-bar
+    display: flex
+    align-items: center
+    background-color: #00a087
+    color: #e8fdff
+    height: $bar-height
+    max-height: $bar-max-height
+    padding: 0 2em
+
+    .header
+        font-size: 2em
+        padding-left: 10px
+        @media (max-width: 350px)
+            display: none
+
+    .compose
+        margin-left: auto
+        background-color: #EBFCFF
+        color: #459C88
+        border: 1px solid black
+        border-radius: 0.5em
+        padding-left: 0.5em
+        padding-right: 0.5em
+        font-weight: 700
+        height: 90%
+
+        :hover
+            background-color: white
+            color: black

@@ -1,0 +1,77 @@
+@import utils/_mixins
+
+$tweet-border-radius: 0.5rem
+$main-and-footer-padding: 0.75rem
+$watch-width: 250px
+
+article.tweet
+    border: 1px solid #CCCCCC
+    border-radius: $tweet-border-radius
+    margin-top: 0.75rem
+    opacity: 0.66
+
+    &:hover
+        opacity: 1
+
+        & footer .icons
+            opacity: 1
+
+
+    header
+        +border-top-radius($tweet-border-radius)
+        background-color: #EEEEEE
+
+        $header-padding: 0.25rem
+        padding: $header-padding
+        height: 3rem
+        display: flex
+
+        .profile-picture
+            border-radius: $tweet-border-radius - $header-padding
+            @media (max-width: 350px)
+                display: none
+
+        .author-data
+            flex-grow: 100
+            position: relative
+            margin: 0.5rem
+            margin-bottom: 1rem
+
+            .author-name
+                +absolute-bottom-left()
+                // Make the text align to the bottom of the box
+                line-height: 0.7
+                @media (max-width: $watch-width)
+                    display: none
+                @media (max-width: 350px)
+                    font-size: 1em
+
+            .author-handle
+                @media (min-width: $watch-width)
+                    +absolute-bottom-right()
+                // Make the text align to the bottom of the box
+                line-height: 0.8
+
+    main
+        display: flex
+        align-items: center
+        padding: $main-and-footer-padding
+        min-height: 5rem
+        color: #3F5961
+
+    footer
+        +border-bottom-radius($tweet-border-radius)
+        padding: $main-and-footer-padding
+        font-size: 0.75rem
+
+        border-radius: min($tweet-border-radius - $main-and-footer-padding, 0)
+
+        .icons
+            display: inline-block
+            float: right
+            opacity: 0
+            height: 1.5rem
+
+            button
+                color: #7BC4B8
+            // margin: 0 0.05rem
