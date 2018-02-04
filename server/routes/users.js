@@ -32,7 +32,8 @@ const errHandler = function internalServerErrorHandler(err, req, res) {
 module.exports = function(router, DataHelpers) {
 
   router.post("/login", (req, res) => {
-    DataHelpers.getUserByHandle(req.body.handle, (err, user) => {
+    const handle = (req.body.handle.startsWith('@') ? '' : '@') + req.body.handle;
+    DataHelpers.getUserByHandle(handle, (err, user) => {
       if (!user || !bcrypt.compareSync(req.body.password, user.password)) {
         res.status(403).send('Invalid email and/or password!');
       } else {
@@ -66,7 +67,7 @@ module.exports = function(router, DataHelpers) {
   });
 
   router.post("/logout", (req, res) => {
-    req.session.userId = null;
+    req.session = null;
     res.status(200).send('logged out');
   });
 
