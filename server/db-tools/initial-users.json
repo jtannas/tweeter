@@ -6,7 +6,7 @@
       "large": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
     },
     "handle": "@SirIsaac",
-    "password": "physics"
+    "password": "$2a$10$wq3Mvc67foG/YzEFocvpJOhzKu4.wlu3SjK0vV.on51hsKerg54M."
   },
   {
     "name": "Descartes",
@@ -16,7 +16,7 @@
       "large": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
     },
     "handle": "@rd",
-    "password": "math"
+    "password": "$2a$10$fp8eP8TBWs0l1NtACfNjTuaDgddMyz.0mf5O7aZRQ8LQ1HjaqSbgi"
   }, {
     "name": "Johann von Goethe",
     "avatars": {
@@ -25,6 +25,6 @@
       "large": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
     },
     "handle": "@johann49",
-    "password": "poetry"
+    "password": "$2a$10$dIkTUt80meHtPbXx.wZ8yOAIS8tdBLykfBZtNmuL5qPusRG/4Bq3S"
   }
 ]

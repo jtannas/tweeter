@@ -4,8 +4,9 @@
 const path = require('path');
 
 require('dotenv').config();
-const express = require("express");
 const bodyParser = require("body-parser");
+const cookieSession = require('cookie-session');
+const express = require("express");
 const { MongoClient } = require("mongodb");
 const nodeSassMiddleware = require('node-sass-middleware');
 
@@ -34,6 +35,11 @@ const createApp = function createAndConfigWebServer(router) {
     outputStyle: 'compressed',
     prefix: '/styles/',
     indentedSyntax: true
+  }));
+  app.use(cookieSession({
+    name: 'session',
+    keys: process.env.session_keys || ['development'],
+    maxAge: 24 * 60 * 60 * 1000
   }));
   app.use(express.static(STATIC_DIR));
   app.use('/', router);

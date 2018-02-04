@@ -41,8 +41,12 @@ module.exports = function makeDataHelpers(db) {
 
     // Create a user in the database
     createUser: function(userData, callback) {
-      db.collection('users').insertOne(userData);
-      callback(null, true);
+      db.collection('users').insertOne(userData, callback);
+    },
+
+    // Find the user for a given handle
+    getUserByHandle: function(handle, callback) {
+      db.collection('users').findOne({ 'handle': handle }, callback);
     }
   };
 };
