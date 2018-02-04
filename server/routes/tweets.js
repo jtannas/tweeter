@@ -60,7 +60,7 @@ module.exports = function(router, DataHelpers) {
     }
   });
 
-  router.patch("/tweets/:tweetId", function(req, res) {
+  router.patch("/tweets/:tweetId/like", function(req, res) {
     DataHelpers.likeTweet(req.params.tweetId, user(req), (err, tweet) => {
       err ? errHandler(err, req, res) : res.status(200).json(tweet);
     });
