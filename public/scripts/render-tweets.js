@@ -30,9 +30,13 @@ const createTweetButtons = function createTweetInteractionButtonElements(tweetDa
   buttons.append($('<button href=""><i class="fas fa-retweet"></i></button>'));
   buttons.append($('<button href=""><i class="fas fa-flag"></i></button>'));
   buttons.append($('<button href=""></button>')
-    .data('likers', tweetData.likers)
     .html(`<i class="fas fa-heart"></i><span class='likes'>${tweetData.likers.length}</span>`)
-    .on('click', function() { $(this).toggleClass('liked', submitLike(tweetData._id)); })
+    .on('click', function() {
+      submitLike(tweetData._id, (resp) => {
+        $(this).toggleClass('liked', resp.liked);
+        $(this).find('.likes').text(resp.likers.length);
+      });
+    })
   );
   return buttons;
 };
@@ -48,7 +52,6 @@ const createTweetFooter = function createTweetFooterElementFromTweetData(tweetDa
 
 const createTweet = function createTweetElementFromTweetData(tweetData) {
   const tweet = $('<article></article>').addClass('tweet');
-  tweet.data("_id", '_id').data("likers", 'likers');
   tweet.append(createTweetHeader(tweetData));
   tweet.append($('<main></main>').text(tweetData.content.text)).append('<hr>');
   tweet.append(createTweetFooter(tweetData));

@@ -23,15 +23,14 @@ module.exports = function makeDataHelpers(db) {
     },
 
     // Update the likes for a single tweet
-    likeTweet: function(id, likerHandle, callback) {
-      const _id = new ObjectID(id);
-      db.collection('tweets').findOne({ _id }, (tweet) => {
-        if ((tweet.user.handle !== likerHandle) && !tweet.likers.includes(liker)) {
-          db.collection('tweets').update({ _id }, { $addToSet: { 'likers': likerHandle } });
-          callback(true);
+    likeTweet: function(id, likerId, callback) {
+      db.collection('tweets').findOne({ _id: new ObjectID(id) }, (err, tweet) => {
+        if ((tweet.user.userId !== likerId) && !tweet.likers.includes(likerId)) {
+          db.collection('tweets').update({ _id: new ObjectID(id) }, { $addToSet: { 'likers': likerId } });
+          callback(err, { liked: true, likers: tweet.likers.concat(likerId) });
         } else {
-          db.collection('tweets').update({ _id }, { $pull: { 'likers': likerHandle } });
-          callback(false);
+          db.collection('tweets').update({ _id: new ObjectID(id) }, { $pull: { likers: likerId } });
+          callback(err, { liked: false, likers: tweet.likers.filter(x => x !== likerId) });
         }
       });
     },

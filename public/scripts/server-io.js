@@ -29,12 +29,12 @@ const submitNewTweet = function submitSerializedDataToServer(serializedData, suc
   });
 };
 
-const submitLike = function submitLikeForATweet(tweetId, userId, successCb) {
+const submitLike = function submitLikeForATweet(tweetId, successCb) {
   $.ajax({
-    type: 'POST',
+    type: 'PATCH',
     cache: false,
     url: `/tweets/${tweetId}/like`,
-    data: { 'userId': userId },
+    data: '',
     success: (data, textStatus, xhr) => successCb(data, textStatus, xhr)
   });
 };
@@ -49,6 +49,15 @@ const loginUser = function loginUser(serializedLoginData, successCb) {
   });
 };
 
+const registerUser = function loginUser(serializedUserData, successCb) {
+  $.ajax({
+    type: 'POST',
+    cache: false,
+    url: '/users',
+    data: serializedUserData,
+    success: (data, textStatus, xhr) => successCb(data, textStatus, xhr)
+  });
+};
 
 const logoutUser = function logoutUser(successCb) {
   $.ajax({

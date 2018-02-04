@@ -1,38 +1,38 @@
 "option strict";
 
 const applyUserFunctions = function applyCallbacksToUserDialogs(loginDialog, registerDialog, logoutButton) {
-  loginDialog.cancelButton.on("click", () => { loginDialog.main[0].close(); });
-
-  function toggleUserButtons() {
-    const session = getCookie("session");
-    console.log(session);
-    loginDialog.showButton.toggle(session === null);
-    registerDialog.showButton.toggle(session === null);
-    logoutButton.toggle(session !== null);
-  }
-
-  loginDialog.form.on("submit", () => {
-    loginUser(loginDialog.form.serialize(), () => {
-      loginDialog.main[0].close();
-      loginDialog.form[0].reset();
-      toggleUserButtons();
-    });
-  });
-
-  registerDialog.cancelButton.on("click", () => { registerDialog.main[0].close(); });
-
-  registerDialog.form.on("submit", () => {
-    registerDialog.main[0].close();
-    toggleUserButtons();
-  });
 
   loginDialog.showButton.on('click', () => { loginDialog.main[0].showModal(); });
-  registerDialog.showButton.on('click', () => { registerDialog.main[0].showModal(); });
-  logoutButton.on('click', () => {
-    logoutUser(() => {
-      toggleUserButtons();
+  loginDialog.form.on("submit", () => {
+    loginUser(loginDialog.form.serialize(), (data, textStatus, xhr) => {
+      loginDialog.form.trigger('user:login');
+      loginDialog.form[0].reset();
+      loginDialog.main[0].close();
     });
   });
+  loginDialog.cancelButton.on("click", () => { loginDialog.main[0].close(); });
+  $(document).bind('user:logout', () => loginDialog.showButton.show());
+  $(document).bind('user:login', () => loginDialog.showButton.hide());
 
-  toggleUserButtons();
+
+  registerDialog.showButton.on('click', () => { registerDialog.main[0].showModal(); });
+  registerDialog.form.on("submit", () => {
+    registerUser(registerDialog.form.serialize(), (data, textStatus, xhr) => {
+      registerDialog.form.trigger('user:register').trigger('user:login');
+      registerDialog.form[0].reset();
+      registerDialog.main[0].close();
+    });
+  });
+  registerDialog.cancelButton.on("click", () => { registerDialog.main[0].close(); });
+  $(document).bind('user:logout', () => registerDialog.showButton.show());
+  $(document).bind('user:login', () => registerDialog.showButton.hide());
+
+
+  logoutButton.on('click', (data, textStatus, xhr) => {
+    logoutUser(() => {
+      logoutButton.trigger('user:logout');
+    });
+  });
+  $(document).bind('user:logout', () => logoutButton.hide());
+  $(document).bind('user:login', () => logoutButton.show());
 };

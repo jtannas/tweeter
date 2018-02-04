@@ -44,7 +44,6 @@ module.exports = function(router, DataHelpers) {
   });
 
   router.post("/users", (req, res) => {
-    let error = undefined;
     if (!req.body.handle) {
       res.status(400).send('Please provide a handle (e.g. @Example)');
     } else if (!req.body.password) {
@@ -58,7 +57,7 @@ module.exports = function(router, DataHelpers) {
           res.status(400).send("That handle has already been taken");
         } else {
           DataHelpers.createUser(userData, (err, user) => {
-            req.session.userId = user._id;
+            req.session.userId = user.insertedId;
             res.status(200).send('registered');
           });
         }

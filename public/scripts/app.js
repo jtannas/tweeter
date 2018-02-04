@@ -92,5 +92,7 @@ $(document).ready(() => {
   });
 
   /** Get the initial tweet data from the server */
+  $(document).bind('user:login', () => refreshTweets());
+  $(document).bind('user:logout', () => refreshTweets());
   refreshTweets();
 });
