@@ -7,7 +7,9 @@
 
 const createProfilePic = function createProfilePicElementFromTweetData(tweetData) {
   const profilePic = $('<img>').addClass("profile-picture");
-  profilePic.attr({ src: tweetData.user.avatars.small, alt: 'profile picture' });
+  try {
+    profilePic.attr({ src: tweetData.user.avatars.small, alt: 'profile picture' });
+  } catch (error) {}
   return profilePic;
 };
 

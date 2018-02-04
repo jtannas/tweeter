@@ -86,13 +86,20 @@ $(document).ready(() => {
 
 
   /** Set the compose button behaviour */
-  $('.compose').on('click', () => {
+  const composeToggle = $('.compose');
+  composeToggle.on('click', () => {
     newTweet.main.slideToggle();
     newTweet.content.focus();
   });
 
+  $(document).bind('user:login', () => {
+    refreshTweets();
+    composeToggle.show();
+  });
+  $(document).bind('user:logout', () => {
+    refreshTweets();
+    composeToggle.hide();
+  });
   /** Get the initial tweet data from the server */
-  $(document).bind('user:login', () => refreshTweets());
-  $(document).bind('user:logout', () => refreshTweets());
   refreshTweets();
 });
