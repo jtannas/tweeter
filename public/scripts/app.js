@@ -39,6 +39,23 @@ $(document).ready(() => {
   flashDialog.closeButton = flashDialog.main.find('.close');
   const flash = flashFunctionFactory(flashDialog);
 
+  /** Create the login references */
+  const loginDialog = { main: $('#login') };
+  loginDialog.showButton = $('nav').find('.login');
+  loginDialog.form = loginDialog.main.find('form');
+  loginDialog.cancelButton = loginDialog.main.find('.cancel');
+  loginDialog.submitButton = loginDialog.main.find('.submit');
+
+  const registerDialog = { main: $('#register') };
+  registerDialog.form = registerDialog.main.find('form');
+  registerDialog.showButton = $('nav').find('.register');
+  registerDialog.cancelButton = registerDialog.main.find('.cancel');
+  registerDialog.submitButton = registerDialog.main.find('.submit');
+
+  const logoutButton = $('.logout');
+
+  applyUserFunctions(loginDialog, registerDialog, logoutButton);
+
 
   /** Set up the newTweet references */
   const newTweet = { main: $('.new-tweet') };
@@ -73,7 +90,6 @@ $(document).ready(() => {
     newTweet.main.slideToggle();
     newTweet.content.focus();
   });
-
 
   /** Get the initial tweet data from the server */
   refreshTweets();
