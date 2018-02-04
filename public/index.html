@@ -23,6 +23,7 @@
     <script type="text/javascript" src="/scripts/render-tweets.js"></script>
     <script type="text/javascript" src="/scripts/server-io.js"></script>
     <script type="text/javascript" src="/scripts/tweet-validation.js"></script>
+    <script type="text/javascript" src="/scripts/users.js"></script>
     <script type="text/javascript" src="/scripts/utils/flash-dialog.js"></script>
     <script type="text/javascript" src="/scripts/utils/time.js"></script>
 
@@ -34,8 +35,41 @@
     <nav id="nav-bar">
       <img class="logo" src="/images/bird.png" alt="logo">
       <span class="header">Tweeter</span>
-      <button class="compose"><i class="far fa-edit"></i> Compose</button>
+      <div class="buttons">
+        <button class="compose"><i class="far fa-edit"></i> Compose</button>
+        <button class="login">Login</button>
+        <button class="register">Register</button>
+        <button class="logout">Log Out</button>
+      </div>
     </nav>
+
+    <!-- Login Dialog-->
+    <dialog id="login">
+      <form method="dialog">
+        <h1>Login</h1>
+        <label for="handle">Tweeter Handle</label>
+        <input type="text" name="handle" placeholder="@handle" required>
+        <label for="password">Password</label>
+        <input name="password" type="password" required>
+        <button class="submit" type="submit">Login</button>
+        <button class="cancel" type="reset">Cancel</button>
+      </form>
+    </dialog>
+
+    <!-- Register Dialog-->
+    <dialog id="register">
+      <form method="dialog">
+        <h1>Register</h1>
+        <label for="name">Name</label>
+        <input type="text" name="name" placeholder="Your Name" required>
+        <label for="handle">Tweeter Handle</label>
+        <input type="text" name="handle" placeholder="@handle" required>
+        <label for="Password">Password</label>
+        <input type="password" required>
+        <button class="submit" type="submit">Register</button>
+        <button class="cancel" type="reset">Cancel</button>
+      </form>
+    </dialog>
 
     <!-- Flash Message Dialog-->
     <dialog class="flash">
