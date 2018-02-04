@@ -23,16 +23,23 @@ module.exports = function makeDataHelpers(db) {
     },
 
     // Update the likes for a single tweet
-    likeTweet: function(_id, liker, callback) {
-      db.collection('tweets').update({ _id: new ObjectID(_id) }, { $addToSet: { 'likers': liker } });
-      callback(null, true);
+    likeTweet: function(id, likerHandle, callback) {
+      const _id = new ObjectID(id);
+      db.collection('tweets').findOne({ _id }, (tweet) => {
+        if ((tweet.user.handle !== likerHandle) && !tweet.likers.includes(liker)) {
+          db.collection('tweets').update({ _id }, { $addToSet: { 'likers': likerHandle } });
+          callback(true);
+        } else {
+          db.collection('tweets').update({ _id }, { $pull: { 'likers': likerHandle } });
+          callback(false);
+        }
+      });
     },
 
     // Get the users from the database
     getUsers: function(callback) {
       db.collection('users').find().toArray(callback);
     },
-
 
     // Get a user from the database
     getUser: function(_id, callback) {

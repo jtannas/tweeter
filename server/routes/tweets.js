@@ -1,11 +1,6 @@
 "use strict";
 
-/** Imports */
-const userHelper = require("../util/user-helper");
-
 /** Helper Functions */
-const user = req => req.body.user ? req.body.user : userHelper.generateRandomUser();
-
 const errHandler = function internalServerErrorHandler(err, req, res) {
   if (err) {
     res.status(500).json({ error: err.message });
@@ -17,6 +12,7 @@ const errHandler = function internalServerErrorHandler(err, req, res) {
 const tweetInvalidHandler = function tweetInvalidErrorHandler(req, res) {
   const validationErrors = [];
   if (!req.body.text) { validationErrors.push('invalid request: no data in POST body'); }
+  if (!req.session.userId) { validationErrors.push('invalid request: no user id'); }
 
   if (validationErrors.length) {
     res.status(400).json({ errors: validationErrors });
@@ -27,7 +23,7 @@ const tweetInvalidHandler = function tweetInvalidErrorHandler(req, res) {
 
 const parseTweet = function parseReqBodyIntoTweetDocument(req) {
   return {
-    user: user(req),
+    user: req.session.userId,
     content: {
       text: req.body.text
     },
@@ -61,9 +57,13 @@ module.exports = function(router, DataHelpers) {
   });
 
   router.patch("/tweets/:tweetId/like", function(req, res) {
-    DataHelpers.likeTweet(req.params.tweetId, user(req), (err, tweet) => {
-      err ? errHandler(err, req, res) : res.status(200).json(tweet);
-    });
+    if (!req.session.userId) {
+      res.status(401).send('You must be logged in to like tweets');
+    } else {
+      DataHelpers.likeTweet(req.params.tweetId, req.session.userId, (err, tweet) => {
+        err ? errHandler(err, req, res) : res.status(200).json(tweet);
+      });
+    }
   });
 
   return router;

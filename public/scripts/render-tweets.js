@@ -25,11 +25,15 @@ const createTweetHeader = function createTweetHeaderElementFromTweetData(tweetDa
   return header;
 };
 
-const createTweetButtons = function createTweetInteractionButtonElements() {
+const createTweetButtons = function createTweetInteractionButtonElements(tweetData) {
   const buttons = $('<div></div>').addClass('icons');
   buttons.append($('<button href=""><i class="fas fa-retweet"></i></button>'));
   buttons.append($('<button href=""><i class="fas fa-flag"></i></button>'));
-  buttons.append($('<button href=""><i class="fas fa-heart"></i></button>'));
+  buttons.append($('<button href=""></button>')
+    .data('likers', tweetData.likers)
+    .html(`<i class="fas fa-heart"></i><span class='likes'>${tweetData.likers.length}</span>`)
+    .on('click', function() { $(this).toggleClass('liked', submitLike(tweetData._id)); })
+  );
   return buttons;
 };
 
@@ -38,12 +42,13 @@ const createTweetFooter = function createTweetFooterElementFromTweetData(tweetDa
   const timeAgo = timeSince(new Date(tweetData.createdAt));
   const localTime = (new Date(tweetData.createdAt)).toLocaleString();
   footer.append($('<span></span>').addClass('date-created').text(timeAgo).prop('title', localTime));
-  footer.append(createTweetButtons());
+  footer.append(createTweetButtons(tweetData));
   return footer;
 };
 
 const createTweet = function createTweetElementFromTweetData(tweetData) {
   const tweet = $('<article></article>').addClass('tweet');
+  tweet.data("_id", '_id').data("likers", 'likers');
   tweet.append(createTweetHeader(tweetData));
   tweet.append($('<main></main>').text(tweetData.content.text)).append('<hr>');
   tweet.append(createTweetFooter(tweetData));
